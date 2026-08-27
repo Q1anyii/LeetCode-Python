@@ -22,12 +22,18 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+遍历[1,n],判断i是否在nums中
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        pass
+        n = len(nums)
+        disappear = []
+        for i in range(n):
+            if i+1 not in nums:
+                disappear.append(i+1)
+        return disappear
 
 
 # ==================== 测试用例 ====================
