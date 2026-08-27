@@ -24,12 +24,23 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+需要返回下表，又需要结合元素进行判断，如果需要最快速获取元素，使用hashtable是最优解
+hashtable按照{num: idx} 存储，因为最后需要返回下标
+因此需要初始化一个hashtable，判断hashtable中的元素是否包含target-（num in nums）
+如果包含，则返回下标，否则存入元素
+当遍历完仍然不存在，说明不符合返回空
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        pass
+        hashtable = {}
+        for i, num in enumerate(nums):
+            diff = target - num
+            if diff in hashtable:
+                return [hashtable.get(diff), i]
+            hashtable[num] = i
+        return []
 
 
 # ==================== 测试用例 ====================
