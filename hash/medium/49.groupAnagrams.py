@@ -23,12 +23,21 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+对每个str做排序，将排序后的str作为key存放(自带去重)，遍历strs，如果str in dict, 作为value append,否则作为key
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        pass
+        hashtable: dict = {}
+        for s in strs:
+            sort = sorted(s)
+            sorted_str = "".join(sort)
+            if sorted_str in hashtable:
+                hashtable.get(sorted_str).append(s)
+            else:
+                hashtable[sorted_str] = [s]
+        return list(hashtable.values())
 
 
 # ==================== 测试用例 ====================
