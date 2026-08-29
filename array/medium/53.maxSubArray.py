@@ -20,12 +20,20 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+维护当前最大值和全局最大值，默认为第一个元素
+对nums遍历
+判断当前最大值=max(curr_max, curr_max + num)
+全局最大值 = max(global_max, curr_max)
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        pass
+        cur_max = global_max = nums[0]
+        for num in nums[1:]:
+            cur_max = max(num, cur_max + num)
+            global_max = max(global_max, cur_max)
+        return global_max
 
 
 # ==================== 测试用例 ====================
@@ -36,6 +44,7 @@ def test_solution():
     assert sol.maxSubArray([5, 4, -1, 7, 8]) == 23
     assert sol.maxSubArray([-1]) == -1
     assert sol.maxSubArray([-2, -1]) == -1
+    assert sol.maxSubArray([-1,0,-2]) == 0
     print('All test cases passed!')
 
 
