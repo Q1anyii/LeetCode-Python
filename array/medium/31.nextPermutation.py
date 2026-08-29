@@ -24,11 +24,33 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+倒序遍历，判断nums[i] >= nums[i + 1]
+        true: 表示当前序列是降序,无更大序列，需要改变i位置, i - 1
+        false: 当前序列是升序，没必要再判断
+        当序列是升序，取大于i的最小数，用于交换位置
+        如果始终是降序，则需倒排
+        取left和right，进行指针交换
+        
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
+        n = len(nums)
+        i = n - 2
+        while i >= 0 and nums[i] >= nums[i+1]:
+            i -= 1
+        if i >= 0:
+            j = n - 1
+            while nums[j] <= nums[i]:
+                j -= 1
+            nums[i], nums[j] = nums[j], nums[i]
+        left = i + 1
+        right = n - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
         pass
 
 
