@@ -26,12 +26,24 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+对n遍历，每个数都对2取余，直到余数为0
+十进制转二进制：
+    对二取余数，n%2, 如果n%2 == 1,标记1位，否则为0，然后n继续%2
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        pass
+        ans = [0]
+        for i in range(1,n+1):
+            count = 0
+            while i != 0:
+                n = i % 2
+                if n == 1:
+                    count += 1
+                i = int(i / 2)
+            ans.append(count)
+        return ans
 
 
 # ==================== 测试用例 ====================
