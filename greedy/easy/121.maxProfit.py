@@ -20,12 +20,25 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+方法1：
+    双层循环
+方法2：
+    取第一个元素做最小值，后续通过遍历的元素对最小值取min
+    定义一个maxProfit默认为0，后续maxProfit = max(price - min, maxProfit)
+    最后返回maxProfit
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        pass
+        maxProfit = 0
+        if not prices:
+            return maxProfit
+        minCost = prices[0]
+        for price in prices:
+            maxProfit = max(price - minCost, maxProfit)
+            minCost = min(price, minCost)
+        return maxProfit
 
 
 # ==================== 测试用例 ====================
