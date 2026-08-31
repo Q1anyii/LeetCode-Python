@@ -23,11 +23,16 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+逻辑异或，n^n=1 1^n=n
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
+        n = nums[0]
+        for i in range(1,len(nums)):
+            n ^= nums[i]
+        return n
         pass
 
 
