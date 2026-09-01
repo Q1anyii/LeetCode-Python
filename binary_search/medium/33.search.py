@@ -20,12 +20,38 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+定义左右指针， 并使用二分查找
+    while左指针小于右指针：
+        mid = left + right // 2
+        首先判断mid所在元素是否等于target，是则直接返回mid
+        判断left所在位置0是否小于mid，是则表明mid左侧子数组升序
+            判断left <= target < mid : 如果是，则使right = mid - 1，缩小差距
+            否则说明target不在left-mid范围中，因此使left = mid + 1， 缩小差距
+        否则表明左侧数组是被旋转后另一半
+            判断target是否in （mid， right），是则left = mid + 1
+            否则right = mid - 1
+    当左指针大于右指针时，说明target不存在于数组中，返回-1
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        pass
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid =  (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[left] <= nums[mid]:
+                if nums[left] <= target < nums[mid]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            else:
+                if nums[mid] < target <= nums[right]:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+        return -1
 
 
 # ==================== 测试用例 ====================
