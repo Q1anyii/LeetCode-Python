@@ -24,16 +24,42 @@ from typing import List, Optional, Dict, Tuple
 
 # ==================== 解题思路 ====================
 """
+二分查找，使用mid找到target所在idx
+先找左边：如果找到了target，先标记，再向左查找，如果还有target，就更新
+右边于左边相似，但第二步向右查找
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        pass
         def find_left():
-            pass
+            left, right = 0, len(nums) - 1
+            res = -1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] == target:
+                    res = mid
+                    right = mid - 1  # 继续往左边找，看有没有更早出现的target
+                elif nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return res
         def find_right():
-            pass
+            left, right = 0, len(nums) - 1
+            res = -1
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] == target:
+                    res = mid
+                    left = mid + 1  # 继续往左边找，看有没有更早出现的target
+                elif nums[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+            return res
+
+        return [find_left(), find_right()]
 
 
 # ==================== 测试用例 ====================
