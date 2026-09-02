@@ -29,14 +29,28 @@ class TreeNode:
 
 # ==================== 解题思路 ====================
 """
+中序遍历顺序：左子树 -> 根节点 -> 右子树
+递归思路：
+1. 递归终止条件：当前节点为 None，直接返回
+2. 递归遍历左子树
+3. 将当前节点的值加入结果列表
+4. 递归遍历右子树
+
+时间复杂度：O(n)，n为节点个数，每个节点访问一次
+空间复杂度：O(n)，最坏情况树退化成链表，递归栈深度为n
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        pass
+        res = []
         def inorder(node):
-            pass
+            if not node: return
+            inorder(node.left)
+            res.append(node.val)
+            inorder(node.right)
+        inorder(root)
+        return res
 
 
 # ==================== 测试用例 ====================
