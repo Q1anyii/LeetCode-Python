@@ -29,15 +29,26 @@ class TreeNode:
 
 # ==================== 解题思路 ====================
 """
+分左右两边取，
+先判断左子树的第一个根节点是否与右子树的第二个节点相同，不相同直接返回false
+后续判断left == right and left.left == right.right and left.right == right.left，再依次往下遍历
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        pass
-        def is_mirror(left, right):
-            pass
-
+        def dfs(a:TreeNode, b:TreeNode):
+            # 两个都为空，对称
+            if a is None and b is None:
+                return True
+            # 一个空一个非空，不对称
+            if a is None or b is None:
+                return False
+            # 值相等 并且 a左 vs b右；a右 vs b左
+            return a.val == b.val and dfs(a.left, b.right) and dfs(a.right, b.left)
+        if not root:
+            return True
+        return dfs(root.left, root.right)
 
 # ==================== 测试用例 ====================
 def test_solution():
