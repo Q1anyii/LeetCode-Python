@@ -25,12 +25,29 @@ class TreeNode:
 
 # ==================== 解题思路 ====================
 """
+思路：翻转二叉树，每个节点的左右子节点互相交换。
+递归做法：
+1. 递归终止条件：当前节点为 None，直接返回
+2. 先递归翻转左子树，再递归翻转右子树
+3. 交换当前节点的 left 和 right
+4. 返回当前节点
+
+时间复杂度 O(n)：遍历全部节点一次
+空间复杂度 O(h)：h为树的高度，递归栈开销；最坏链表 O(n)
 """
 
 # ==================== 代码实现 ====================
 class Solution:
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        pass
+    def invertTree(self, root: TreeNode | None) -> TreeNode | None:
+        if not root:
+            return None
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+
+        # 交换左右
+        root.left = right
+        root.right = left
+        return root
 
 
 # ==================== 测试用例 ====================
