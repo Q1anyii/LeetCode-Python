@@ -26,14 +26,31 @@ class TreeNode:
 
 # ==================== 解题思路 ====================
 """
+思路：升序数组是二叉搜索树的中序遍历结果。
+要构建高度平衡BST：每次选取数组中间元素作为根节点；
+中间左边区间递归构建左子树；中间右边区间递归构建右子树。
+1. 递归边界：左边界 > 右边界，返回None
+2. 取mid = (left + right) // 2，nums[mid]作为当前根
+3. [left, mid‑1] 递归构造左子树
+4. [mid+1, right] 递归构造右子树
+
+时间复杂度 O(n)：每个元素构建节点一次
+空间复杂度 O(logn)：平衡树递归栈深度；最坏O(n)存树节点
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-        pass
         def build(left, right):
-            pass
+            if left > right:
+                return None
+            mid = (left + right) // 2
+            root = TreeNode(nums[mid])
+            root.left = build(left, mid - 1)
+            root.right = build(mid + 1, right)
+            return root
+        return build(0, len(nums) - 1)
+
 
 
 # ==================== 测试用例 ====================
