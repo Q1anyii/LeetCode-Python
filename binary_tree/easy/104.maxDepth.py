@@ -26,12 +26,27 @@ class TreeNode:
 
 # ==================== 解题思路 ====================
 """
+思路：二叉树最大深度，根到最远叶子的节点数量。
+递归：当前节点为空，深度为0；
+当前节点不为空，则当前深度 = max(左子树深度, 右子树深度) + 1
++1代表算上当前这一层节点。
+递归分别求左、右子树的深度，取较大值，加上当前节点层数。
+
+时间复杂度 O(n)：每个节点访问一次
+空间复杂度 O(h)：h为树高度，递归栈开销；最坏退化成链表O(n)
 """
 
 # ==================== 代码实现 ====================
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        pass
+        if not root:
+            return 0
+        # 左子树深度
+        left_depth = self.maxDepth(root.left)
+        # 右子树深度
+        right_depth = self.maxDepth(root.right)
+        # 取左右最大，+1计入当前节点
+        return max(left_depth, right_depth) + 1
 
 
 # ==================== 测试用例 ====================
